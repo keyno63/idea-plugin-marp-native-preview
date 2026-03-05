@@ -1,0 +1,20 @@
+<idea-plugin>
+    <id>com.keyno.marpnative</id>
+    <name>Marp Native Preview</name>
+    <vendor email="devnull@example.com">keyno</vendor>
+
+    <description><![CDATA[
+      Native Marp-like markdown slide preview for IntelliJ IDEs.
+      This plugin does not call marp-cli.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends optional="true">org.intellij.plugins.markdown</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Marp Native Preview"
+                    anchor="right"
+                    canCloseContent="false"
+                    factoryClass="com.keyno.marpnative.MarpNativeToolWindowFactory"/>
+    </extensions>
+</idea-plugin>

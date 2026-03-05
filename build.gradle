@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij.platform' version '2.11.0'
+}
+
+group = providers.gradleProperty('pluginGroup').get()
+version = providers.gradleProperty('pluginVersion').get()
+
+repositories {
+    mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(providers.gradleProperty('javaVersion').get().toInteger())
+    }
+}
+
+dependencies {
+    implementation 'org.commonmark:commonmark:0.24.0'
+    intellijPlatform {
+        create(providers.gradleProperty('platformType').get(), providers.gradleProperty('platformVersion').get())
+        bundledPlugin('com.intellij.java')
+        bundledPlugin('org.intellij.plugins.markdown')
+        instrumentationTools()
+    }
+}
+
+intellijPlatform {
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = '252'
+            untilBuild = '252.*'
+        }
+        description = """
+            Native Marp-like slide preview inside IntelliJ-based IDEs without marp-cli.
+            It renders markdown slides in a dedicated tool window using an internal Java renderer.
+        """.stripIndent().trim()
+    }
+}
+
+tasks {
+    runIde {
+        jvmArgs '-Xmx2g'
+    }
+}
