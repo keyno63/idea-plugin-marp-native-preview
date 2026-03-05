@@ -21,6 +21,8 @@ java {
 
 dependencies {
     implementation 'org.commonmark:commonmark:0.24.0'
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     intellijPlatform {
         create(providers.gradleProperty('platformType').get(), providers.gradleProperty('platformVersion').get())
         bundledPlugin('com.intellij.java')
@@ -43,6 +45,10 @@ intellijPlatform {
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
+
     runIde {
         jvmArgs '-Xmx2g'
     }
