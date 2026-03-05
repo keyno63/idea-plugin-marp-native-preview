@@ -51,3 +51,8 @@ Front matter keys currently used:
 
 This implementation is native and does not execute `marp-cli`.  
 Compatibility is intentionally partial compared to official Marp.
+
+## License
+
+This project is licensed under the Apache License 2.0.  
+See [LICENSE](LICENSE) for details.
