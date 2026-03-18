@@ -20,6 +20,10 @@ This is a native IntelliJ Platform plugin that renders Marp-like slides from mar
 
 ## Build and run
 
+Compatibility target:
+
+- IntelliJ IDEA Community / Ultimate 253+ (built against IntelliJ IDEA 2025.3 platform)
+
 Requirements:
 
 - Gradle runtime JDK 21-23 (recommended: JDK 21)
