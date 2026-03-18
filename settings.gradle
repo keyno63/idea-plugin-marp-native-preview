@@ -1,1 +1,15 @@
+def current = JavaVersion.current()
+def minSupported = JavaVersion.VERSION_21
+def maxSupported = JavaVersion.VERSION_23
+
+if (current < minSupported || current > maxSupported) {
+    throw new GradleException(
+            "Unsupported Gradle runtime JDK: ${System.getProperty('java.version')} (${current}). " +
+            "Use JDK 21-23 for this project. " +
+            "PowerShell example: " +
+            "\$env:JAVA_HOME='C:\\\\Users\\\\<you>\\\\.jdks\\\\corretto-21.0.3'; " +
+            "\$env:PATH=\"\$env:JAVA_HOME\\\\bin;\$env:PATH\"; .\\\\gradlew.bat buildPlugin"
+    )
+}
+
 rootProject.name = 'idea-plugin-marp-native-preview'

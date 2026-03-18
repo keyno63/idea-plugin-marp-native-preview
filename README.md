@@ -22,8 +22,8 @@ This is a native IntelliJ Platform plugin that renders Marp-like slides from mar
 
 Requirements:
 
-- JDK 21
-  - Unsupported: JDK >= 24 because the build chain can use it. 
+- Gradle runtime JDK 21-23 (recommended: JDK 21)
+  - Unsupported: JDK >= 24 (for example JDK 25 can fail with `Type T not present`)
 - Gradle (or add wrapper later)
 
 Commands:
@@ -32,10 +32,26 @@ Commands:
 gradle runIde
 ```
 
+PowerShell example with JDK 21:
+
+```powershell
+$env:JAVA_HOME='C:\Users\<you>\.jdks\corretto-21.0.3'
+$env:PATH="$env:JAVA_HOME\bin;$env:PATH"
+.\gradlew.bat runIde
+```
+
 Package ZIP:
 
 ```bash
 gradle buildPlugin
+```
+
+PowerShell example with JDK 21:
+
+```powershell
+$env:JAVA_HOME='C:\Users\<you>\.jdks\corretto-21.0.3'
+$env:PATH="$env:JAVA_HOME\bin;$env:PATH"
+.\gradlew.bat buildPlugin
 ```
 
 ## Supported directives
