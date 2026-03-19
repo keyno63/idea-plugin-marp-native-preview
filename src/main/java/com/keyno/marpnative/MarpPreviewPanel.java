@@ -1,5 +1,6 @@
 package com.keyno.marpnative;
 
+import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
@@ -8,11 +9,17 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBSplitter;
 import com.intellij.ui.jcef.JBCefBrowser;
 import org.jetbrains.annotations.NotNull;
+import org.cef.browser.CefBrowser;
+import org.cef.browser.CefFrame;
+import org.cef.handler.CefRequestHandlerAdapter;
+import org.cef.network.CefRequest;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.BorderLayout;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class MarpPreviewPanel {
     private final Project project;
@@ -27,6 +34,7 @@ public class MarpPreviewPanel {
         this.project = project;
         this.browser = new JBCefBrowser();
         this.renderer = new MarpSlideRenderer();
+        installExternalLinkHandler();
 
         JPanel root = new JPanel(new BorderLayout());
         JBSplitter splitter = new JBSplitter(true, 1.0f);
@@ -75,6 +83,38 @@ public class MarpPreviewPanel {
 
         String markdown = editor.getDocument().getText();
         browser.loadHTML(renderer.render(markdown));
+    }
+
+    private void installExternalLinkHandler() {
+        browser.getJBCefClient().addRequestHandler(new CefRequestHandlerAdapter() {
+            @Override
+            public boolean onBeforeBrowse(CefBrowser cefBrowser, CefFrame frame, CefRequest request,
+                                          boolean userGesture, boolean isRedirect) {
+                if (request == null || frame == null || !frame.isMain()) {
+                    return false;
+                }
+
+                String url = request.getURL();
+                if (isHttpUrl(url)) {
+                    BrowserUtil.browse(url);
+                    return true;
+                }
+                return false;
+            }
+        }, browser.getCefBrowser());
+    }
+
+    private static boolean isHttpUrl(String url) {
+        if (url == null || url.isBlank()) {
+            return false;
+        }
+        try {
+            URI uri = new URI(url);
+            String scheme = uri.getScheme();
+            return "http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme);
+        } catch (URISyntaxException ignored) {
+            return false;
+        }
     }
 
     private static boolean isMarkdown(VirtualFile file) {
