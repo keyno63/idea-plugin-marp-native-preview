@@ -23,6 +23,8 @@ dependencies {
     implementation 'org.commonmark:commonmark:0.24.0'
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    // IntelliJ test framework initializer still references JUnit 4 TestRule.
+    testImplementation 'junit:junit:4.13.2'
     intellijPlatform {
         intellijIdea(providers.gradleProperty('platformVersion').get())
         bundledPlugin('com.intellij.java')
