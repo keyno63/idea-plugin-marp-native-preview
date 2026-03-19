@@ -1,4 +1,3 @@
-
 ---
 marp: true
 title: Native Marp Demo
@@ -8,7 +7,7 @@ theme: default
 
 # Native Marp Preview
 
-This deck is rendered inside IntelliJ by the plugin.
+The plugin renders this deck inside IntelliJ.
 
 ---
 
@@ -23,3 +22,8 @@ This deck is rendered inside IntelliJ by the plugin.
 ```java
 System.out.println("Hello slides");
 ```
+
+---
+## Links
+
+[My GitHub](https://github.com/keyno63)
