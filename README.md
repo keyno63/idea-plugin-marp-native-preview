@@ -11,6 +11,17 @@ This is a native IntelliJ Platform plugin that renders Marp-like slides from mar
 - Renders markdown to HTML with an internal Java renderer (`commonmark`)
 - Shows slides in JCEF with keyboard navigation (Left/Right, PgUp/PgDn, Home/End)
 
+## Install for users
+
+1. Open the Releases page:
+  - https://github.com/keyno63/idea-plugin-marp-native-preview/releases
+2. Download the ZIP file from the release marked **Latest**.
+3. In IntelliJ IDEA, open:
+  - `Settings` > `Plugins`
+4. Click the gear icon in the Plugins screen, then choose:
+  - `Install Plugin from Disk...`
+5. Select the downloaded ZIP file and install it.
+
 ## Project layout
 
 - `src/main/java/com/keyno/marpnative/MarpNativeToolWindowFactory.java`
